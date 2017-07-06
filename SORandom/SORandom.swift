@@ -38,7 +38,7 @@ Performs single Bernoulli trial with given probability of success.
 - returns: Success or failure as Int: 1 or 0.
 */
 
-public func randBinomial(probabilityOfSuccess: Double) -> Int {
+public func randBinomial(_ probabilityOfSuccess: Double) -> Int {
     return randContUniform(0.0, 1.0) < probabilityOfSuccess ? 1 : 0
 }
 
@@ -51,7 +51,7 @@ Performs series of independent Bernoulli trials with given probability of succes
 - returns: Array of 1 and 0, which indicate successes and failures.
 */
 
-public func randBinomials(probabilityOfSuccess: Double, _ sampleLength: Int) -> [Int] {
+public func randBinomials(_ probabilityOfSuccess: Double, _ sampleLength: Int) -> [Int] {
     return randContUniforms(0, 1, sampleLength).map { $0 < probabilityOfSuccess ? 1 : 0 }
 }
 
@@ -63,7 +63,7 @@ Simulates symmetric coin tossing experiment.
 - returns: Array of 1 and 0, which indicate heads and tails.
 */
 
-public func coinTosses(sampleLength: Int) -> [Int] {
+public func coinTosses(_ sampleLength: Int) -> [Int] {
     return randBinomials(0.5, sampleLength)
 }
 
@@ -79,7 +79,7 @@ The probability distribution of the number X of Bernoulli trials needed to get o
 - returns: Single pseudorandom variable from geometric distribution with given probability of success.
 */
 
-public func randGeom(probabilityOfSuccess: Double) -> Int {
+public func randGeom(_ probabilityOfSuccess: Double) -> Int {
     return Int(ceil(log(randContUniform(0, 1)) / log(1 - probabilityOfSuccess)))
 }
 
@@ -93,7 +93,7 @@ The probability distribution of the number X of Bernoulli trials needed to get o
 - returns: Array of independent pseudorandom variables from geometric distribution with given probability of success.
 */
 
-public func randGeoms(probabilityOfSuccess: Double, _ sampleLength: Int) -> [Int] {
+public func randGeoms(_ probabilityOfSuccess: Double, _ sampleLength: Int) -> [Int] {
     return randContUniforms(0, 1, sampleLength).map { Int(ceil(log($0) / log(1 - probabilityOfSuccess))) }
 }
 
@@ -106,7 +106,7 @@ Generate single pseudorandom variable from Poisson distribution.
 - returns: Single pseudorandom variable from Poisson distribution with given lambda.
 */
 
-public func randPoisson(lambda: Double) -> Int {
+public func randPoisson(_ lambda: Double) -> Int {
     var k = 0
     var prob = exp(-lambda)
     var cdf = prob
@@ -129,7 +129,7 @@ Generates array of independent pseudorandom variables from Poisson distribution.
 - returns: Array of independent pseudorandom variables from Poisson distribution with given lambda.
 */
 
-public func randPoissons(lambda: Double, _ sampleLength: Int) -> [Int] {
+public func randPoissons(_ lambda: Double, _ sampleLength: Int) -> [Int] {
     return (0..<sampleLength).map { _ in randPoisson(lambda) }
 }
 
@@ -146,7 +146,7 @@ Generates single pseudorandom variable from discrete uniform distribution.
 - returns: Single pseudorandom variable from discrete uniform distribution with given boundaries.
 */
 
-public func randDiscUniform(min: Int, _ max: Int) -> Int {
+public func randDiscUniform(_ min: Int, _ max: Int) -> Int {
     return Int(arc4random_uniform(UInt32(max - min + 1))) + min
 }
 
@@ -160,7 +160,7 @@ Generates array of independent pseudorandom variables from discrete uniform dist
 - returns: Array of independent pseudorandom variables from discrete uniform distribution with given boundaries.
 */
 
-public func randDiscUniforms(min: Int, _ max: Int, _ sampleLength: Int) -> [Int] {
+public func randDiscUniforms(_ min: Int, _ max: Int, _ sampleLength: Int) -> [Int] {
     return (0..<sampleLength).map { _ in randDiscUniform(min, max) }
 }
 
@@ -175,7 +175,7 @@ Generates single pseudorandom variable from continuous uniform distribution.
 - returns: Single pseudorandom variable from continuous uniform distribution with given boundaries.
 */
 
-public func randContUniform(min: Double, _ max: Double) -> Double {
+public func randContUniform(_ min: Double, _ max: Double) -> Double {
     return (max - min) * Double(Double(arc4random()) / Double(UINT32_MAX)) + min
 }
 
@@ -189,7 +189,7 @@ Generates array of independent pseudorandom variables from continuous uniform di
 - returns: Array of independent pseudorandom variables from continuous uniform distribution with given boundaries. 
 */
 
-public func randContUniforms(min: Double, _ max: Double, _ sampleLength: Int) -> [Double] {
+public func randContUniforms(_ min: Double, _ max: Double, _ sampleLength: Int) -> [Double] {
     return (0..<sampleLength).map { _ in randContUniform(min, max) }
 }
 
@@ -203,7 +203,7 @@ public func randContUniforms(min: Double, _ max: Double, _ sampleLength: Int) ->
 :returns: Single pseudorandom variable from beta distribution with given shapes.
 */
 
-public func randBeta(shape1: Double, _ shape2: Double) -> Double {
+public func randBeta(_ shape1: Double, _ shape2: Double) -> Double {
     
     let maxValue = pow((shape1 - 1) / (shape1 + shape2 - 2), shape1 - 1) * pow((shape2 - 1) / (shape1 + shape2 - 2), shape2 - 1)
     var u1, u2: Double
@@ -226,7 +226,7 @@ Generates array of independent pseudorandom variables from beta distribution.
 - returns: Array of independent pseudorandom variables from beta distribution with given shapes.
 */
 
-public func randBetas(shape1: Double, _ shape2: Double, _ sampleLength: Int) -> [Double] {
+public func randBetas(_ shape1: Double, _ shape2: Double, _ sampleLength: Int) -> [Double] {
     return (0..<sampleLength).map { _ in randBeta(shape1, shape2) }
 }
 
@@ -241,7 +241,7 @@ Function uses inverse transform sampling.
 - returns: Single pseudorandom variable from exponential distribution with given rate.
 */
 
-public func randExp(rate: Double) -> Double {
+public func randExp(_ rate: Double) -> Double {
     return -1.0 / rate * log(randContUniform(0, 1))
 }
 
@@ -255,7 +255,7 @@ Function uses inverse transform sampling.
 - returns: Array of independent pseudorandom variables from exponential distribution with given rate.
 */
 
-public func randExps(rate: Double, _ sampleLength: Int) -> [Double] {
+public func randExps(_ rate: Double, _ sampleLength: Int) -> [Double] {
     return randContUniforms(0, 1, sampleLength).map { -1.0 / rate * log($0) }
 }
 
@@ -270,7 +270,7 @@ Generates single pseudorandom variable from gamma distribution.
 - returns: Single pseudorandom variable from gamma distribution with given shape and rate.
 */
 
-public func randGamma(shape: Double, _ rate: Double) -> Double {
+public func randGamma(_ shape: Double, _ rate: Double) -> Double {
     
     let lambda = rate/shape
     
@@ -296,7 +296,7 @@ Generates array of independent pseudorandom variables from gamma distribution.
 - returns: Array of independent pseudorandom variables from gamma distribution with given shape and rate.
 */
 
-public func randGammas(shape: Double, _ rate: Double, _ sampleLength: Int) -> [Double] {
+public func randGammas(_ shape: Double, _ rate: Double, _ sampleLength: Int) -> [Double] {
     return (0..<sampleLength).map { _ in randGamma(shape, rate) }
 }
 
@@ -314,7 +314,7 @@ Function uses Box-Muller transform.
 */
 
 // TODO: Refactor
-public func randNormal(mean: Double, _ standardDeviation: Double) -> Double {
+public func randNormal(_ mean: Double, _ standardDeviation: Double) -> Double {
     
     let u = randContUniforms(0, 1, 2)
     let r2 = -2.0 * log(u[0])
@@ -335,13 +335,13 @@ Function uses Box-Muller transform.
 */
 
 // TODO: Refactor
-public func randNormals(mean: Double, _ standardDeviation: Double, _ sampleLength: Int) -> [Double] {
+public func randNormals(_ mean: Double, _ standardDeviation: Double, _ sampleLength: Int) -> [Double] {
     
     let numberOfPairs: Int = sampleLength / 2
     let u1 = randContUniforms(0, 1, numberOfPairs)
     let u2 = randContUniforms(0, 1, numberOfPairs)
     
-    var randomSample = [Double](count: sampleLength, repeatedValue: 0.0)
+    var randomSample = [Double](repeating: 0.0, count: sampleLength)
     
     var r2: Double
     var theta: Double
@@ -376,7 +376,7 @@ Generates single pseudorandom variable from lognormal distribution.
 - returns: Single pseudorandom variable from lognormal distribution with given location and shape.
 */
 
-public func randLognormal(location: Double, _ shape: Double) -> Double {
+public func randLognormal(_ location: Double, _ shape: Double) -> Double {
     return exp(randNormal(location, shape))
 }
 
@@ -390,7 +390,7 @@ Generates array of independent pseudorandom variables from lognormal distributio
 - returns: Array of independent pseudorandom variables from lognormal distribution with given location and shape.
 */
 
-public func randLognormals(location: Double, _ shape: Double, _ sampleLength: Int) -> [Double] {
+public func randLognormals(_ location: Double, _ shape: Double, _ sampleLength: Int) -> [Double] {
     return randNormals(location, shape, sampleLength).map { exp($0) }
 }
 
@@ -405,7 +405,7 @@ Generates single pseudorandom variable from Pareto distribution.
 - returns: Single pseudorandom variable from Pareto distribution with given scale and shape.
 */
 
-public func randPareto(scale: Double, _ shape: Double) -> Double {
+public func randPareto(_ scale: Double, _ shape: Double) -> Double {
     return scale * pow(randContUniform(0, 1), -1.0 / shape)
 }
 
@@ -419,7 +419,7 @@ Generates array of independent pseudorandom variables from Pareto distribution.
 - returns: Array of independent pseudorandom variables from Pareto distribution with given scale and shape.
 */
 
-public func randParetos(scale: Double, _ shape: Double, _ sampleLength: Int) -> [Double] {
+public func randParetos(_ scale: Double, _ shape: Double, _ sampleLength: Int) -> [Double] {
     return randContUniforms(0, 1, sampleLength).map { scale * pow($0, -1.0 / shape) }
 }
 
@@ -434,7 +434,7 @@ Generates single pseudorandom variable from Weibull distribution.
 - returns: Single pseudorandom variable from Weibull distribution with given scale and shape.
 */
 
-public func randWeibull(scale: Double, _ shape: Double) -> Double {
+public func randWeibull(_ scale: Double, _ shape: Double) -> Double {
     return 1 / scale * pow(-log(randContUniform(0, 1)), 1 / shape)
 }
 
@@ -448,7 +448,7 @@ Generates array of independent pseudorandom variables from Weibull distribution.
 - returns: Array of independent pseudorandom variables from Weibull distribution with given scale and shape.
 */
 
-public func randWeibulls(scale: Double, _ shape: Double, _ sampleLength: Int) -> [Double] {
+public func randWeibulls(_ scale: Double, _ shape: Double, _ sampleLength: Int) -> [Double] {
     return randContUniforms(0, 1, sampleLength).map { 1 / scale * pow(-log($0), 1 / shape) }
 }
 
@@ -467,7 +467,7 @@ Generates single pseudorandom variable from stable distribution.
 Might return inf or nan for very small values of `stability`
 */
 
-public func randStable(stability: Double, _ skewness: Double, _ scale: Double, _ location: Double) -> Double {
+public func randStable(_ stability: Double, _ skewness: Double, _ scale: Double, _ location: Double) -> Double {
   
     let v = randContUniform(-M_PI_2, M_PI_2)
     let w = randExp(1)
@@ -499,7 +499,7 @@ Generates single pseudorandom variable from stable distribution.
 Might return `inf` or `nan` for very small values of `stability`
 */
 
-public func randStables(stability: Double, _ skewness: Double, _ scale: Double, _ location: Double, _ sampleLength: Int) -> [Double] {
+public func randStables(_ stability: Double, _ skewness: Double, _ scale: Double, _ location: Double, _ sampleLength: Int) -> [Double] {
     
     let v = randContUniforms(-M_PI_2, M_PI_2, sampleLength)
     let w = randExps(1, sampleLength)
@@ -517,9 +517,21 @@ public func randStables(stability: Double, _ skewness: Double, _ scale: Double, 
         }
     } else {
         let a = location + M_2_PI * location * scale * log(scale)
-        let b = (0..<sampleLength).map { log((M_PI_2 * w[$0] * cos(v[$0])) / (M_PI_2 + skewness * v[$0])) }
-        
-        return (0..<sampleLength).map { scale * M_2_PI * ((M_PI_2 + skewness * v[$0]) * tan(v[$0]) - skewness * b[$0]) + a }
+
+        func devide(_ arg:Int) -> Double {
+            return Double.pi/2 * w[arg] * cos(v[arg])
+        }
+
+        func numerator(_ arg:Int) -> Double {
+            return Double.pi/2 + skewness*v[arg]
+        }
+
+        let b = (0..<sampleLength).map { log(devide($0) / numerator($0))}
+
+        func summand(_ arg:Int) -> Double {
+            return ((Double.pi/2 + skewness * v[arg]) * tan(v[arg]) - skewness * b[arg])
+        }
+        return (0..<sampleLength).map { scale * M_2_PI * summand($0) + a }
     }
 
     //return (0..<sampleLength).map { _ in randStable(stability, skewness, scale, location) }
@@ -538,7 +550,7 @@ Generates random sample from given array - sampling with replacement.
 */
 
 // TODO: Refactor
-public func sampleWithReplacement<T>(arrayToSampleFrom: [T], _ sampleLength: Int) -> [T] {
+public func sampleWithReplacement<T>(_ arrayToSampleFrom: [T], _ sampleLength: Int) -> [T] {
     
     let inputArrayLength = arrayToSampleFrom.count
     var randomSample: [T] = []
@@ -561,7 +573,8 @@ Function uses Fisher-Yates shuffling algorithm and returns Array of first `sampl
 */
 
 // TODO: Refactor
-public func sampleWithoutReplacement<T>(var arrayToSampleFrom: [T], _ sampleLength: Int) -> [T] {
+public func sampleWithoutReplacement<T>(_ arrayToSampleFrom: [T], _ sampleLength: Int) -> [T] {
+    var arrayToSampleFrom = arrayToSampleFrom
     
     let inputArrayLength = arrayToSampleFrom.count
     
@@ -584,10 +597,10 @@ Generates random sample from given array using weights given by the user.
 */
 
 // TODO: Refactor
-public func sampleWithWeights<T>(arrayToSampleFrom: [T], _ weights: [Double], _ sampleLength: Int) -> [T] {
+public func sampleWithWeights<T>(_ arrayToSampleFrom: [T], _ weights: [Double], _ sampleLength: Int) -> [T] {
     
     var randomSample: [T] = []
-    let sumOfWeights = weights.reduce(0, combine: +)
+    let sumOfWeights = weights.reduce(0, +)
     
     for _ in 0..<sampleLength {
         

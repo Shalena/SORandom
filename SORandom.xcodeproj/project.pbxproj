@@ -279,6 +279,7 @@
 				TargetAttributes = {
 					912784CB1B18C80900DF7C27 = {
 						CreatedOnToolsVersion = 6.3.2;
+						LastSwiftMigration = 0830;
 					};
 					9189280D1C22325400E9E9FC = {
 						CreatedOnToolsVersion = 7.2;
@@ -512,6 +513,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sebastianosinski.SORandom;
 				PRODUCT_NAME = SORandom;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -529,6 +531,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sebastianosinski.SORandom;
 				PRODUCT_NAME = SORandom;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -715,6 +718,7 @@
 				91B686571C23316900FA939C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		91B686621C23318A00FA939C /* Build configuration list for PBXNativeTarget "SORandom watchOS" */ = {
 			isa = XCConfigurationList;
@@ -723,6 +727,7 @@
 				91B686641C23318A00FA939C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		91B6866F1C2331AD00FA939C /* Build configuration list for PBXNativeTarget "SORandom tvOS" */ = {
 			isa = XCConfigurationList;
@@ -731,6 +736,7 @@
 				91B686711C2331AD00FA939C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
